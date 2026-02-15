@@ -5,10 +5,10 @@ const express = require ('express');
 const app = express();
 
 // Définir le port
-const PORT = 3306;
+const PORT = 3000;
 
 // Middleware pour parser le JSON
-app.use(cors());
+
 app.use(express.json());
 
 // Route de test (page d'accueil)
