@@ -19,7 +19,8 @@ class Eleve {
       (nom, prenom, email, date_naissance)
       VALUES (?, ?, ?, ?)
     `;
-
+ 
+    //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
       data.nom,
       data.prenom,
