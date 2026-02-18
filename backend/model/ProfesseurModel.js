@@ -21,7 +21,7 @@ class Professeur {
 ]
 
     const sql = `
-      INSERT INTO eleves
+      INSERT INTO Professeur
       (nom, prenom, email, date_naissance)
       VALUES (?, ?, ?, ?)
     `;
