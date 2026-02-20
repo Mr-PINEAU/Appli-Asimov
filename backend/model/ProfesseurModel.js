@@ -23,7 +23,7 @@ class Professeur {
     const sql = `
       INSERT INTO Professeur
       (nom, prenom, email, date_naissance)
-      VALUES (?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?)
     `;
  
     //Retranscryptage des données par MYSQL2
@@ -67,6 +67,7 @@ class Professeur {
       WHERE id=?
     `;
 
+  //Retranscryptage des données par MYSQL2
     await db.execute(sql, [
       data.nom,
       data.prenom,
