@@ -8,21 +8,21 @@ class Professeur {
  
   // Jeu de données
   const data = [
-  { id: 1, nom: "Martin", prenom: Sophie, email: "sophie.martin@ecole.fr", date_naissance: "1978-03-14" },
-  { id: 2, nom: "Bernard", prenom: "Luc", email: "luc.bernard@ecole.fr", date_naissance: "1982-07-22" },
-  { id: 3, nom: "Dupont", prenom: "Claire", email: "claire.dupont@ecole.fr", date_naissance: "1975-11-05" },
-  { id: 4, nom: "Leroy", prenom: "Julien", email: "julien.leroy@ecole.fr", date_naissance: "1990-01-30" },
-  { id: 5, nom: "Moreau", prenom: "Isabelle", email: "isabelle.moreau@ecole.fr", date_naissance: "1968-09-17" },
-  { id: 6, nom: "Simon", prenom: "Thomas", email: "thomas.simon@ecole.fr", date_naissance: "1985-04-08" },
-  { id: 7, nom: "Laurent", prenom: "Marie", email: "marie.laurent@ecole.fr", date_naissance: "1979-12-25" },
-  { id: 8, nom: "Lefebvre", prenom: "Nicolas", email: "nicolas.lefebvre@ecole.fr", date_naissance: "1993-06-11" },
-  { id: 9, nom: "Michel", prenom: "Aurélie", email: "aurelie.michel@ecole.fr", date_naissance: "1971-08-03" },
-  { id: 10, nom: "Garcia", prenom: "Pierre", email: "pierre.garcia@ecole.fr", date_naissance: "1987-02-19" }
+  {id: 1, nom: "Martin", prenom: Sophie, email: "sophie.martin@ecole.fr", specialite:"Mathematique"},
+  {id: 2, nom: "Bernard", prenom: "Luc", email: "luc.bernard@ecole.fr", specialite:"Français"},
+  {id: 3, nom: "Dupont", prenom: "Claire", email: "claire.dupont@ecole.fr", specialite:"Géographie"},
+  {id: 4, nom: "Leroy", prenom: "Julien", email: "julien.leroy@ecole.fr", specialite:"Histoire"},
+  {id: 5, nom: "Moreau", prenom: "Isabelle", email: "isabelle.moreau@ecole.fr", specialite:"Anglais"},
+  {id: 6, nom: "Simon", prenom: "Thomas", email: "thomas.simon@ecole.fr", specialite:"Éducation Sportive"},
+  {id: 7, nom: "Laurent", prenom: "Marie", email: "marie.laurent@ecole.fr", specialite:"Espagnol"},
+  {id: 8, nom: "Lefebvre", prenom: "Nicolas", email: "nicolas.lefebvre@ecole.fr", specialite:"Enseigement Morale Civique"},
+  {id: 9, nom: "Michel", prenom: "Aurélie", email: "aurelie.michel@ecole.fr", specialite:"Art Plastique"},
+  {id: 10, nom: "Garcia", prenom: "Pierre", email: "pierre.garcia@ecole.fr", specialite:"Musique"}
 ]
 
     const sql = `
       INSERT INTO Professeur
-      (nom, prenom, email, date_naissance)
+      (nom, prenom, email, specialite)
       VALUES (?, ?, ?, ?, ?)
     `;
  
@@ -31,7 +31,7 @@ class Professeur {
       data.nom,
       data.prenom,
       data.email,
-      data.dateNaissance
+      data.specialite
     ]);
 
     return result.insertId;
@@ -63,7 +63,7 @@ class Professeur {
 
     const sql = `
       UPDATE Professeur
-      SET nom=?, prenom=?, email=?, date_naissance=?
+      SET nom=?, prenom=?, email=?, specialite=?
       WHERE id=?
     `;
 
@@ -72,7 +72,7 @@ class Professeur {
       data.nom,
       data.prenom,
       data.email,
-      data.dateNaissance,
+      data.specialite,
       id
     ]);
   }
