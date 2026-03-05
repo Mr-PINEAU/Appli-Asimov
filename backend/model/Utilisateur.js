@@ -8,27 +8,31 @@ class Utilisateur {
   static async create(data) {
 
   const data = [
-    {idUtilisateur: 1, idRole: 1, nom: "Laméche", prenom:"Jean", email: "jean@laméche.com", mot_de_passe:"454TR30", id_role:"professeur", actif:"TRUE"},
-    {id: 2, nom: "Legout", prenom:"Benoit", email: "benoit@legout.com", mot_de_passe:"benoit1465?", id_role:"admin", actif:"TRUE"},
-    {id: 3, nom: "Lemaitre", prenom:"Christophe", email: "christophe@lemaitre.com", mot_de_passe:"christophe12345", id_role:"eleve", actif:"TRUE"},
-    {id: 4, nom: "Milas", prenom:"Abra", email: "abra@milas.com", mot_de_passe:"56!lkjmilaaaas", id_role:"professeur", actif:"TRUE"},
-    {id: 5, nom: "Nicouse", prenom:"Martine", email: "martine@nicouse.com", mot_de_passe:"1456Nicouse", id_role:"admin", actif:"TRUE"}
+    {idUtilisateur: 1, idRole: 1, nom: "Laméche", prenom:"Jean",adresse: "12 Rue de la Paix, Paris",telephone: "0601020304", email: "j.laméche@college.com", mot_de_passe:"hashed_password_1",actif:"TRUE"},
+    {idUtilisateur: 2, idRole: 2, nom: "Legout", prenom:"Benoit", adresse: "9 rue Charle de Gaulle, Paris", telephone: "0612233445", email: "b.legout@college.com", mot_de_passe:"hashed_password_2",actif: true},
+    {idUtilisateur: 3, idRole: 3, nom: "Lemaitre", prenom:"Christophe",adresse: "1 Avenue des Champs-Élysées, Paris",telephone: "0634455667", email: "c.lemaitre@college.com", mot_de_passe:"hashed_password_4", actif:true},
+    {idUtilisateur: 4, idRole: 3, nom: "Sophie", prenom:"Anne",adresse: "3 rue de Rivoli, Paris",telephone: "0634455667", email: "s.anne@college.com", mot_de_passe:"hashed_password_5", actif:true},
+    {idUtilisateur: 5, idRole: 4, nom: "Roux", prenom:"Thom",adresse: "10 Boulevard Saint-Germain, Paris",telephone: "0634195660", email: "r.thome@college.com", mot_de_passe:"hashed_password_5", actif:true},
+    {idUtilisateur: 6, idRole: 4, nom: "Morrel", prenom:"Benoît",adresse: "5 rue Mouffetard, Paris",telephone: "0612233446", email: "m.benoît@college.com", mot_de_passe:"hashed_password_5", actif:true},
+    {idUtilisateur: 3, idRole: 3, nom: "Fournier", prenom:"Chloe",adresse: " 3 Boulevard Haussman, Paris",telephone: "0612233446", email: "f.chloe@college.com", mot_de_passe:"hashed_password_6", actif:true},
   ];
 
     const sql = `
       INSERT INTO Utilisateur
-      (id, nom, prenom, email, mot_de_passe, id_role, actif)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      (idRole, nom, prenom, adresse, telephone, email, mot_de_passe, actif)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
  
     //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
-      data.id,
+      data.idUtilisateur,
+      data.idRole,
       data.nom,
       data.prenom,
+      data.adresse,
+      data.telephone,
       data.email,
       data.mot_de_passe,
-      data.id_role,
       data.actif
     ]);
 
@@ -46,42 +50,44 @@ class Utilisateur {
   }
 
 // Trouver un utilisateur par id
-  static async findById(id, id_role) {
+  static async findById(idUtilisateur) {
 
     const [rows] = await db.execute(
-      "SELECT * FROM Utilisateur WHERE id = ?, id_role = ?"
-      [id, id_role]
+      "SELECT * FROM Utilisateur WHERE idUtilisateur=?"
+      [idUtilisateur]
     );
 
     return rows[0];
   }
 
 //Mettre à jour un utilisateur
-  static async update(id, data) {
+  static async update(idUtilisateur, data) {
 
     const sql = `
       UPDATE Utilisateur
-      SET nom=?, prenom=?, email=?, mot_de_passe=?, actif=?
-      WHERE id=? and id_role=?
+      SET nom=?, prenom=?, adresse=?, telephone=?, email=?, mot_de_passe=?, actif=?
+      WHERE idUtilisateur=? AND idRole=?
     `;
 
     await db.execute(sql, [
       data.nom,
-      data.prenom,       
+      data.prenom, 
+      data.adresse,
+      data.telephone,      
       data.email,
       data.mot_de_passe,
       data.actif,
-      id,                
-      data.id_role
+      idUtilisateur,                
+      data.idRole
     ]);
   }
 
 //Supprimer un utilisateur
-  static async delete(id) {
+  static async delete(idUtilisateur) {
 
     await db.execute(
-      "DELETE FROM Utilisateur WHERE id = ?",
-      [id]
+      "DELETE FROM Utilisateur WHERE idUtilisateur = ?",
+      [idUtilisateur]
     );
   }
 
