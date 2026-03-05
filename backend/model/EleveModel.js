@@ -28,9 +28,9 @@ class Eleve {
  
     //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
-      idEleve,
-      idUtilisateur,
-      idClasse,
+      data.idEleve,
+      data.idUtilisateur,
+      data.idClasse,
       data.numeroEleve,
       data.dateInscription,
       data.statut,
@@ -79,7 +79,7 @@ class Eleve {
       data.redoublant,
       idEleve,
       idUtilisateur,
-      idClasse,
+      idClasse
     ]);
   }
 
