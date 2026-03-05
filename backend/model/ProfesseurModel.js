@@ -8,30 +8,31 @@ class Professeur {
  
   // Jeu de données
   const data = [
-  {id: 1, nom: "Martin", prenom: Sophie, email: "sophie.martin@ecole.fr", specialite:"Mathematique"},
-  {id: 2, nom: "Bernard", prenom: "Luc", email: "luc.bernard@ecole.fr", specialite:"Français"},
-  {id: 3, nom: "Dupont", prenom: "Claire", email: "claire.dupont@ecole.fr", specialite:"Géographie"},
-  {id: 4, nom: "Leroy", prenom: "Julien", email: "julien.leroy@ecole.fr", specialite:"Histoire"},
-  {id: 5, nom: "Moreau", prenom: "Isabelle", email: "isabelle.moreau@ecole.fr", specialite:"Anglais"},
-  {id: 6, nom: "Simon", prenom: "Thomas", email: "thomas.simon@ecole.fr", specialite:"Éducation Sportive"},
-  {id: 7, nom: "Laurent", prenom: "Marie", email: "marie.laurent@ecole.fr", specialite:"Espagnol"},
-  {id: 8, nom: "Lefebvre", prenom: "Nicolas", email: "nicolas.lefebvre@ecole.fr", specialite:"Enseigement Morale Civique"},
-  {id: 9, nom: "Michel", prenom: "Aurélie", email: "aurelie.michel@ecole.fr", specialite:"Art Plastique"},
-  {id: 10, nom: "Garcia", prenom: "Pierre", email: "pierre.garcia@ecole.fr", specialite:"Musique"}
+  {id: 1, idUtilisateur: 2, matricule:"02134569", specialite:"Mathematique", dateEmbauche:"2022-08-20"},
+  {id: 2, idUtilisateur: 1, matricule:"10134469", specialite:"Français", dateEmbauche:"2022-09-20" },
+  {id: 3, idUtilisateur: 4, matricule:"14135461", specialite:"Géographie", dateEmbauche:"2021-07-23"},
+  {id: 4, idUtilisateur: 3, matricule:"10104964", specialite:"Histoire", dateEmbauche:"2019-03-14"},
+  {id: 5, idUtilisateur: 5, matricule:"15534199", specialite:"Anglais", dateEmbauche:"2020-11-23"},
+  {id: 6, idUtilisateur: 2, matricule:"810332466", specialite:"Éducation Sportive", dateEmbauche:"2018-04-03"},
+  {id: 7, idUtilisateur: 6, matricule:"50145462", specialite:"Espagnol", dateEmbauche:"2016-05-07"},
+  {id: 8, idUtilisateur: 1, matricule:"10137610", specialite:"Enseigement Morale Civique", dateEmbauche:"2013-06-22"},
+  {id: 9, idUtilisateur: 3, matricule:"12336869", specialite:"Art Plastique", dateEmbauche:"2019-06-23"},
+  {id: 10,idUtilisateur: 2,nom: "Garcia", prenom: "Pierre", email: "pierre.garcia@ecole.fr", specialite:"Musique",dateEmbauche:"2023-10-11"}
 ]
 
     const sql = `
       INSERT INTO Professeur
-      (nom, prenom, email, specialite)
+      (id, idUtilisateur, matricule, specialite, dateEmbauche)
       VALUES (?, ?, ?, ?, ?)
     `;
  
     //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
-      data.nom,
-      data.prenom,
-      data.email,
-      data.specialite
+      id,
+      idUtilisateur,
+      data.matricule,
+      data.specialite,
+      data.dateEmbauche
     ]);
 
     return result.insertId;
@@ -63,17 +64,17 @@ class Professeur {
 
     const sql = `
       UPDATE Professeur
-      SET nom=?, prenom=?, email=?, specialite=?
-      WHERE id=?
+      SET matricule=?, specialite=?, dateEmbauche=? 
+      WHERE id=?, idUtilisateur=?
     `;
 
   //Retranscryptage des données par MYSQL2
     await db.execute(sql, [
-      data.nom,
-      data.prenom,
-      data.email,
+      id,
+      idUtilisateur,
+      data.matricule,
       data.specialite,
-      id
+      data.dateEmbauche
     ]);
   }
 
