@@ -22,7 +22,7 @@ class Eleve {
 
     const sql = `
       INSERT INTO eleves
-      (idEleve, idUtilisateur, idClasse, numeroEleve, dateInscription, statut, anneeScolaire, redoublant)
+      (idUtilisateur, idClasse, numeroEleve, dateInscription, statut, anneeScolaire, redoublant)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
  
