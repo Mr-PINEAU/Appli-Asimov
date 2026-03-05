@@ -17,7 +17,7 @@ class Classe {
 
     const sql = `
       INSERT INTO Classe
-      ( niveau, libelle)
+      (niveau, libelle)
       VALUES (?, ?)
     `;
  
@@ -52,7 +52,7 @@ class Classe {
   }
 
 //Mettre à jour une classe
-  static async update(id, data) {
+  static async update(id_classe, data) {
 
     const sql = `
       UPDATE Classe
@@ -63,16 +63,16 @@ class Classe {
     await db.execute(sql, [
       data.niveau,
       data.libelle,
-      data.id_classe
+      id_classe
     ]);
   }
 
 //Supprimer une classe
-  static async delete(id) {
+  static async delete(id_classe) {
 
     await db.execute(
       "DELETE FROM Classe WHERE id_classe = ?",
-      [id]
+      [id_classe]
     );
   }
 
