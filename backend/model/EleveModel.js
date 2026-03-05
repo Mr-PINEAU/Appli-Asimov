@@ -7,25 +7,34 @@ class Eleve {
   static async create(data) {
 
   const data = [
-    { id:1 , name: 'Dupont', firstname :'Alice', email: 'alice@dupont.com', date_naissance : '12/02/2004' },
-    { id:2 , name: 'Bob', firstname :'Léponge' , email: 'bob@léponge.com', date_naissance : '31/05/2006' },
-    { id:3 , name: 'Nordine', firstname :'Ateure' , email: 'nordine@ateure.com', date_naissance : '01/10/2003' } ,
-    { id:4 , name: 'Romain', firstname :'Loucot' , email: 'romain@loucot.com', date_naissance : '17/12/2004'} ,
-    { id:5 , name: 'Elisa', firstname :'Levaloit' , email: 'elisa@levaloit.com', date_naissance : '18/07/2004'}
-];
+    { idEleve: 1 , idUtilisateur: 10, numeroEleve:"ELV-2024-001", dateInscription:"2024-09-02", statut:"Actif", anneeScolaire:"2024/2025", redoublant: false},
+    { idEleve: 2 , idUtilisateur: 11, numeroEleve:"ELV-2024-002", dateInscription:"2024-09-02", statut:"Actif", anneeScolaire:"2024/2025", redoublant: true},
+    { idEleve: 3 , idUtilisateur: 12, numeroEleve:"ELV-2024-003", dateInscription:"2024-09-03", statut:"Actif", anneeScolaire:"2024/2025", redoublant: false } ,
+    { idEleve: 4 , idUtilisateur: 13, numeroEleve:"ELV-2024-004", dateInscription:"2024-09-04", statut:"Suspendue", anneeScolaire:"2024/2025", redoublant: false} ,
+    { idEleve: 5 , idUtilisateur: 14, numeroEleve:"ELV-2024-005", dateInscription:"2024-09-04", statut:"Actif", anneeScolaire:"2024/2025", redoublant: true},
+    { idEleve: 6 , idUtilisateur: 15, numeroEleve:"ELV-2024-006", dateInscription:"2024-09-04", statut:"Actif", anneeScolaire:"2024/2025", redoublant: false},
+    { idEleve: 7 , idUtilisateur: 16, numeroEleve:"ELV-2024-007", dateInscription:"2024-09-05", statut:"Transféré", anneeScolaire:"2023/2024", redoublant: false},
+    { idEleve: 8 , idUtilisateur: 17, numeroEleve:"ELV-2024-008", dateInscription:"2024-09-05", statut:"Actif", anneeScolaire:"2024/2025", redoublant: false},
+    { idEleve: 9 , idUtilisateur: 18, numeroEleve:"ELV-2024-009", dateInscription:"2024-09-06", statut:"Actif", anneeScolaire:"2024/2025", redoublant: true},
+    { idEleve: 10 , idUtilisateur: 19, numeroEleve:"ELV-2024-010", dateInscription:"2024-09-06", statut:"Exclu", anneeScolaire:"2024/2025", redoublant: false} 
+  
+  ];
 
     const sql = `
       INSERT INTO eleves
-      (nom, prenom, email, date_naissance)
-      VALUES (?, ?, ?, ?)
+      (idEleve, idUtilisateur, numeroEleve, dateInscription, statut, anneeScolaire, redoublant)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
  
     //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
-      data.nom,
-      data.prenom,
-      data.email,
-      data.dateNaissance
+      idEleve,
+      idUtilisateur,
+      data.numeroEleve,
+      data.dateInscription,
+      data.statut,
+      data.anneeScolairee,
+      data.redoublant
     ]);
 
     return result.insertId;
@@ -42,40 +51,42 @@ class Eleve {
   }
 
 // Trouver les élèves par id
-  static async findById(id) {
+  static async findById(idEleve) {
 
     const [rows] = await db.execute(
-      "SELECT * FROM eleves WHERE id = ?",
-      [id]
+      "SELECT * FROM eleves WHERE idEleve = ?",
+      [idEleve]
     );
 
     return rows[0];
   }
 
 //Mettre à jour un élève
-  static async update(id, data) {
+  static async update(idEleve, data) {
 
     const sql = `
       UPDATE eleves
-      SET nom=?, prenom=?, email=?, date_naissance=?
-      WHERE id=?
+      SET numeroEleve=?, dateInscription=?, statut=?, anneeScolaire=?, redoublant=?
+      WHERE idEleve=? AND idUtilisateur=?
     `;
 
     await db.execute(sql, [
-      data.nom,
-      data.prenom,
-      data.email,
-      data.dateNaissance,
-      id
+      data.numeroEleve,
+      data.dateInscription,
+      data.statut,
+      data.anneeScolairee,
+      data.redoublant,
+      idEleve,
+      idUtilisateur,
     ]);
   }
 
 //Supprimer un élève
-  static async delete(id) {
+  static async delete(idEleve) {
 
     await db.execute(
-      "DELETE FROM eleves WHERE id = ?",
-      [id]
+      "DELETE FROM eleves WHERE idEleve = ?",
+      [idEleve]
     );
   }
 
