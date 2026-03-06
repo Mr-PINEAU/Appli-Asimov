@@ -7,7 +7,7 @@ class HistoriqueClasse {
   static async create(data) {
 
     const sql = `
-      INSERT INTO historique_classes
+      INSERT INTO HistoriqueClasse
       (idEleve, idClasse, anneeScolaire, semestre, moyenneGenerale, dateDebut, dateFin, statut)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
@@ -30,7 +30,7 @@ class HistoriqueClasse {
   static async findAll() {
 
     const [rows] = await db.execute(
-      "SELECT * FROM historique_classes"
+      "SELECT * FROM HistoriqueClasse"
     );
 
     return rows;
@@ -40,7 +40,7 @@ class HistoriqueClasse {
   static async findById(idHistorique) {
 
     const [rows] = await db.execute(
-      "SELECT * FROM historique_classes WHERE idHistorique = ?",
+      "SELECT * FROM HistoriqueClasse WHERE idHistorique = ?",
       [idHistorique]
     );
 
@@ -67,7 +67,7 @@ class HistoriqueClasse {
 
     const [rows] = await db.execute(
       `SELECT anneeScolaire, semestre, moyenneGenerale
-       FROM historique_classes
+       FROM HistoriqueClasse
        WHERE idEleve = ?
        ORDER BY anneeScolaire ASC, semestre ASC`,
       [idEleve]
@@ -80,7 +80,7 @@ class HistoriqueClasse {
   static async updateMoyenne(idHistorique, moyenneGenerale) {
 
     const sql = `
-      UPDATE historique_classes
+      UPDATE HistoriqueClasse
       SET moyenneGenerale = ?
       WHERE idHistorique = ?
     `;
@@ -95,7 +95,7 @@ class HistoriqueClasse {
   static async update(idHistorique, data) {
 
     const sql = `
-      UPDATE historique_classes
+      UPDATE HistoriqueClasse
       SET idClasse = ?, anneeScolaire = ?, semestre = ?, moyenneGenerale = ?, dateDebut = ?, dateFin = ?, statut = ?
       WHERE idHistorique = ?
     `;
@@ -116,7 +116,7 @@ class HistoriqueClasse {
   static async delete(idHistorique) {
 
     await db.execute(
-      "DELETE FROM historique_classes WHERE idHistorique = ?",
+      "DELETE FROM HistoriqueClasse WHERE idHistorique = ?",
       [idHistorique]
     );
   }
