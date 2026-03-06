@@ -47,7 +47,7 @@ class HistoriqueClasse {
     return rows[0];
   }
 
-  // Trouver tout l'historique d'un élève (toutes ses classes passées)
+  // Trouver tout l'historique d'un élève  - toutes ses classes passées)
   static async findByEleve(idEleve) {
 
     const [rows] = await db.execute(
