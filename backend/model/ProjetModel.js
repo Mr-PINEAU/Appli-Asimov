@@ -176,7 +176,7 @@ class Projet {
   static async removeParticipant(idProjet, idEleve, idProfesseur) {
 
     await db.execute(
-      "DELETE FROM ParticipationProjet WHERE idProjet = ? AND idEleve = ?",
+      "DELETE FROM ParticipationProjet WHERE idProjet = ? AND idEleve = ? AND idProfesseur = ?",
       [idProjet, idEleve, idProfesseur]
     );
   }
