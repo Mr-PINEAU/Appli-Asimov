@@ -34,7 +34,7 @@ class Eleve {
       data.numeroEleve,
       data.dateInscription,
       data.statut,
-      data.anneeScolairee,
+      data.anneeScolaire,
       data.redoublant
     ]);
 
@@ -75,7 +75,7 @@ class Eleve {
       data.numeroEleve,
       data.dateInscription,
       data.statut,
-      data.anneeScolairee,
+      data.anneeScolaire,
       data.redoublant,
       idEleve,
       idUtilisateur,
