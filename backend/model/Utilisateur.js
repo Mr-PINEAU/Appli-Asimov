@@ -53,7 +53,7 @@ class Utilisateur {
   static async findById(idUtilisateur) {
 
     const [rows] = await db.execute(
-      "SELECT * FROM Utilisateur WHERE idUtilisateur=?"
+      "SELECT * FROM Utilisateur WHERE idUtilisateur=?",
       [idUtilisateur]
     );
 
