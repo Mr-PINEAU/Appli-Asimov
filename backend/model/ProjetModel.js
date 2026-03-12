@@ -28,7 +28,7 @@ class Projet {
     const sql = `
       INSERT INTO projets
       (nomProjet, description, dateDebut, dateFin, valideParCommission, statut, idResponsable)
-      VALUES (?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
     const [result] = await db.execute(sql, [
@@ -96,7 +96,7 @@ class Projet {
 
     const sql = `
       UPDATE projets
-      SET nomProjet = ?, description = ?, dateDebut = ?, dateFin = ?, statut = ?, valideParCommission = ?, 
+      SET nomProjet = ?, description = ?, dateDebut = ?, dateFin = ?, statut = ?, valideParCommission = ? 
       WHERE idProjet = ? AND idResponsable = ?
     `;
 
@@ -164,7 +164,7 @@ class Projet {
     const sql = `
       UPDATE ParticipationsProjet
       SET date_Fin = ?
-      WHERE idProjet = ? AND idEleve = ? AND idProfesseur
+      WHERE idProjet = ? AND idEleve = ? AND idProfesseur = ?
     `;
 
     await db.execute(sql, [
