@@ -6,6 +6,16 @@ class Convention {
   // Créer une convention
   static async create(data) {
 
+      const data = [
+    {idStage: 1, entreprise:"SARL Yannick TOTA", tuteur:"Albert", date_debut:"2025-05-25", date_fin:"2025-06-24", signature:true},
+    {idStage: 3, entreprise:"Alma", tuteur:"Benoît", date_debut:"2025-01-20", date_fin:"2025-02-20", signature:true},
+    {idStage: 2, entreprise:"Wizbii", tuteur:"Albert", date_debut:"2025-03-02", date_fin:"2025-04-04", signature:true},
+    {idStage: 4, entreprise:"Thales", tuteur:"Marie", date_debut:"2025-01-11", date_fin:"2025-02-10", signature:true},
+    {idStage: 2, entreprise:"Hardis-Group", tuteur:"Michel", date_debut:"2025-11-01", date_fin:"2025-12-02", signature:true},
+    {idStage: 1, entreprise:"Economecom", tuteur:"Pierre", date_debut:"2025-02-01", date_fin:"2025-03-02", signature:true},
+
+  ];
+
     const sql = `
       INSERT INTO Convention
       (idStage, entreprise, tuteur, date_debut, date_fin, signature)
