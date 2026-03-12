@@ -28,8 +28,8 @@ class Professeur {
  
     //Retranscryptage des données par MYSQL2
     const [result] = await db.execute(sql, [
-      id,
-      idUtilisateur,
+      data.id,
+      data.idUtilisateur,
       data.matricule,
       data.specialite,
       data.dateEmbauche
@@ -65,7 +65,7 @@ class Professeur {
     const sql = `
       UPDATE Professeur
       SET matricule=?, specialite=?, dateEmbauche=? 
-      WHERE id=?, idUtilisateur=?
+      WHERE id=? AND idUtilisateur=?
     `;
 
   //Retranscryptage des données par MYSQL2
