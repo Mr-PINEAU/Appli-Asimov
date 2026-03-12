@@ -20,7 +20,7 @@ class Stage {
     const sql = `
       INSERT INTO Stage
       (eleve_id, date_debut, date_fin, evaluation)
-      VALUES (?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?)
     `;
  
     //Retranscryptage des données par MYSQL2
