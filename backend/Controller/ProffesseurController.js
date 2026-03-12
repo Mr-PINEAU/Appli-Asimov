@@ -61,7 +61,7 @@ class ProfesseurController {
     }
   }
 
-  // Mettre à jour un professeur
+  //  Mettre à jour un professeur
   static async update(req, res) {
     try {
 
