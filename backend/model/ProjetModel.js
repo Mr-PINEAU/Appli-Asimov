@@ -5,6 +5,25 @@ class Projet {
 
   // Créer un projet (validé par la commission - contrôle à faire dans le contrôleur)
   static async create(data) {
+    const data = [
+      
+  {nomProjet:"Potager pédagogique", description:"Création et entretien d’un potager par les élèves pour apprendre l’écologie et l’agriculture.", dateDebut:"2025-03-01", dateFin:"2025-06-15", valideParCommission:true, statut:"en_cours", idResponsable:1},
+  {nomProjet:"Journal du collège", description:"Rédaction d’un journal scolaire par les élèves avec des articles sur la vie du collège.", dateDebut:"2025-01-10", dateFin:"2025-05-30", valideParCommission:true, statut:"en_cours", idResponsable:2},
+  {nomProjet:"Club robotique", description:"Initiation à la robotique et programmation avec réalisation de petits robots.", dateDebut:"2025-02-01", dateFin:"2025-06-20", valideParCommission:true, statut:"en_cours", idResponsable:3},
+  {nomProjet:"Projet théâtre", description:"Préparation et représentation d’une pièce de théâtre par les élèves.", dateDebut:"2025-01-15", dateFin:"2025-04-30", valideParCommission:true, statut:"termine", idResponsable:4},
+  {nomProjet:"Sensibilisation au recyclage", description:"Campagne menée par les élèves pour encourager le tri des déchets dans le collège.", dateDebut:"2025-03-10", dateFin:"2025-05-15", valideParCommission:true, statut:"en_cours", idResponsable:5},
+  {nomProjet:"Atelier écriture", description:"Atelier permettant aux élèves de développer leur créativité à travers l’écriture.", dateDebut:"2025-02-10", dateFin:"2025-05-25", valideParCommission:true, statut:"en_cours", idResponsable:2},
+  {nomProjet:"Semaine des langues", description:"Organisation d’activités culturelles pour découvrir différentes langues et cultures.", dateDebut:"2025-04-07", dateFin:"2025-04-11", valideParCommission: false, statut:"propose", idResponsable:3},
+  {nomProjet:"Tournoi sportif interclasses", description:"Organisation d’un tournoi sportif entre les différentes classes du collège.", dateDebut:"2025-05-01", dateFin:"2025-06-10", valideParCommission:true, statut:"en_cours", idResponsable:4}
+];
+
+
+
+
+
+
+
+
 
     const sql = `
       INSERT INTO projets
