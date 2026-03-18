@@ -2,25 +2,26 @@
 const express = require("express");
 const router = express.Router();
 const ProfesseurController = require("../Controller/ProfesseurController");
+const { tousLesRoles, secretariatSeulement, proviseurOuSecretariat, proviseurSeulement } = require("../Middleware/auth");
 
-// Créer un professeur
+// Créer un professeur (secrétariat uniquement)
 // POST http://localhost:3000/api/professeurs
-router.post("/", ProfesseurController.create);
+router.post("/", secretariatSeulement, ProfesseurController.create);
 
-// Récupérer tous les professeurs
+// Récupérer tous les professeurs (secrétariat et proviseur)
 // GET http://localhost:3000/api/professeurs
-router.get("/", ProfesseurController.findAll);
+router.get("/", proviseurOuSecretariat, ProfesseurController.findAll);
 
-// Trouver un professeur par id
+// Trouver un professeur par id (tout le monde)
 // GET http://localhost:3000/api/professeurs/:id
-router.get("/:id", ProfesseurController.findById);
+router.get("/:id", tousLesRoles, ProfesseurController.findById);
 
-// Mettre à jour un professeur
+// Mettre à jour un professeur (secrétariat et proviseur)
 // PUT http://localhost:3000/api/professeurs/:id
-router.put("/:id", ProfesseurController.update);
+router.put("/:id", proviseurOuSecretariat, ProfesseurController.update);
 
-// Supprimer un professeur
+// Supprimer un professeur (proviseur uniquement)
 // DELETE http://localhost:3000/api/professeurs/:id
-router.delete("/:id", ProfesseurController.delete);
+router.delete("/:id", proviseurSeulement, ProfesseurController.delete);
 
 module.exports = router;
