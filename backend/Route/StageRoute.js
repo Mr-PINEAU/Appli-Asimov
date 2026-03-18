@@ -2,25 +2,26 @@
 const express = require("express");
 const router = express.Router();
 const StageController = require("../Controller/StageController");
+const { tousLesRoles, secretariatSeulement, proviseurOuSecretariat, proviseurSeulement } = require("../Middleware/auth");
 
-// Créer un stage
+// Créer un stage (secrétariat uniquement)
 // POST http://localhost:3000/api/stages
-router.post("/", StageController.create);
+router.post("/", secretariatSeulement, StageController.create);
 
-// Récupérer tous les stages
+// Récupérer tous les stages (secrétariat et proviseur)
 // GET http://localhost:3000/api/stages
-router.get("/", StageController.findAll);
+router.get("/", proviseurOuSecretariat, StageController.findAll);
 
-// Trouver un stage par id
+// Trouver un stage par id (tout le monde)
 // GET http://localhost:3000/api/stages/:idStage
-router.get("/:idStage", StageController.findById);
+router.get("/:idStage", tousLesRoles, StageController.findById);
 
-// Mettre à jour un stage
+// Mettre à jour un stage (secrétariat et proviseur)
 // PUT http://localhost:3000/api/stages/:idStage
-router.put("/:idStage", StageController.update);
+router.put("/:idStage", proviseurOuSecretariat, StageController.update);
 
-// Supprimer un stage
+// Supprimer un stage (proviseur uniquement)
 // DELETE http://localhost:3000/api/stages/:idStage
-router.delete("/:idStage", StageController.delete);
+router.delete("/:idStage", proviseurSeulement, StageController.delete);
 
 module.exports = router;
