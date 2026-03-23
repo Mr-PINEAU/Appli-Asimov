@@ -6,14 +6,6 @@ class Classe {
 //Créer une Classe
   static async create(data) {
 
-  const data = [
-    {id_classe: 1, niveau:"6ème", libelle:"A"},
-    {id_classe: 2, niveau:"4ème", libelle:"C" },
-    {id_classe: 3, niveau:"3ème", libelle:"D"},
-    {id_classe: 4, niveau:"6ème", libelle:"B"},
-    {id_classe: 5, niveau:"4ème", libelle:"A"},
-    {id_classe: 6, niveau:"5ème", libelle:"C"},
-  ];
 
     const sql = `
       INSERT INTO Classe

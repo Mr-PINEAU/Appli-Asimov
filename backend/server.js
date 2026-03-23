@@ -1,12 +1,8 @@
 // Importer Express
 const express = require ('express');
 
-//Importation des models
-const Eleve = require("./Model/Eleve");
-const Professeur = require("./Model/Professeur");
-
 // Créer l'application Express
-const app = express();
+const express = express();
 
 //Importation de dotenv pour les variables d'environement
 require("dotenv").config();
