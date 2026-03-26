@@ -8,28 +8,40 @@ import javafx.scene.control.*;
 public class EleveController {
 
     @FXML private TableView<Eleve> tableEleves;
-    @FXML private TableColumn<Eleve, String> colNom;
-    @FXML private TableColumn<Eleve, String> colPrenom;
-    @FXML private TableColumn<Eleve, String> colClasse;
+    @FXML private TableColumn<Eleve, String> colNumeroEleve;
+    @FXML private TableColumn<Eleve, String> colDateInscription;
+    @FXML private TableColumn<Eleve, String> colActif;
+    @FXML private TableColumn<Eleve, String> colAnneeScolaire;
+    @FXML private TableColumn<Eleve, Boolean> colRedoublant;
 
-    @FXML private TextField nomField;
-    @FXML private TextField prenomField;
-    @FXML private TextField classeField;
+
+
+    @FXML private TextField numeroEleveField;
+    @FXML private TextField dateInscriptionField;
+    @FXML private TextField actifField;
+    @FXML private TextField anneeScolaireField;
+    @FXML private TextField redoublantField;
 
     private final EleveService service = new EleveService();
 
     @FXML
     public void initialize() {
-        colNom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNom()));
-        colPrenom.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPrenom()));
-        colClasse.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getClasse()));
+        colNumeroEleve.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getNumeroEleve()));
+        colDateInscription.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDateInscription()));
+        colActif.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getActif()));
+        colAnneeScolaire.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getAnneeScolaire()));
+        colRedoublant.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getRedoublant()));
 
         // Quand on clique sur un élève → remplir les champs
         tableEleves.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-                nomField.setText(newVal.getNom());
-                prenomField.setText(newVal.getPrenom());
-                classeField.setText(newVal.getClasse());
+                numeroEleveField.setText(newVal.getNumeroEleve());
+                dateInscriptionField.setText(newVal.getDateInscription());
+                actifField.setText(newVal.getActif());
+                anneeScolaireField.setText(newVal.getAnneeScolaire());
+                redoublantField.setText(newVal.getRedoublant());
+
+
             }
         });
     }
@@ -42,9 +54,13 @@ public class EleveController {
     @FXML
     private void ajouter() {
         Eleve e = new Eleve(
-                nomField.getText(),
-                prenomField.getText(),
-                classeField.getText()
+                numeroEleveField.getText(),
+                dateInscriptionField.getText(),
+                actifField.getText(),
+                anneeScolaireField.getText(),
+                redoublantField.getBoolean()
+
+
         );
 
         service.ajouter(e);
@@ -57,9 +73,11 @@ public class EleveController {
         Eleve selected = tableEleves.getSelectionModel().getSelectedItem();
 
         if (selected != null) {
-            selected.setNom(nomField.getText());
-            selected.setPrenom(prenomField.getText());
-            selected.setClasse(classeField.getText());
+            selected.setNumeroEleve(numeroEleveField.getText());
+            selected.setDateInscription(dateInscriptionField.getText());
+            selected.setActif(actifField.getText());
+            selected.setAnneeScolaire(anneeScolaireField.getText());
+            selected.setRedoublant(redoublantField.getText());
 
             service.modifier(selected);
             charger();
