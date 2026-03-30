@@ -11,12 +11,9 @@ public class EleveModel {
     private String anneeScolaire;
     private boolean redoublant;
 
-    public Eleve() {}
+    // Creation d'un nouvel eleves
+    public EleveModel (int IdUtilisateur, int IdClasse, String numeroEleve, String dateInscription, String actif, String anneeScolairee, boolean redoublant) {
 
-    // Récupération d'un eleves existant ou modification
-    public Eleve(int IdEleve,int IdUtilisateur, int IdClasse, String numeroEleve, String dateInscription, String actif, String anneeScolairee, boolean redoublant) {
-
-        this.IdEleve = IdEleve;
         this.IdUtilisateur = IdUtilisateur;
         this.IdClasse = IdClasse;
         this.numeroEleve = numeroEleve;
@@ -25,16 +22,8 @@ public class EleveModel {
         this.anneeScolaire = anneeScolairee;
         this.redoublant = redoublant;
     }
-    // Creation d'un nouvel eleves
-    public Eleve(int IdUtilisateur, int IdClasse, String numeroEleve, String dateInscription, String actif, String anneeScolairee, boolean redoublant) {
 
-        this.IdUtilisateur = idUtilisateur;
-        this.IdClasse = IdClasse;
-        this.numeroEleve = numeroEleve;
-        this.dateInscription = dateInscription;
-        this.actif = actif;
-        this.anneeScolaire = anneeScolairee;
-        this.redoublant = redoublant;
+    public EleveModel(String numeroEleve, String text, String text1, String text2, boolean selected) {
     }
 
     public int getIdEleve() { return IdEleve; }
@@ -44,7 +33,7 @@ public class EleveModel {
     public void setIdUtilisateur(int IdUtilisateur) { this.IdUtilisateur = IdUtilisateur; }
 
     public int getIdClasse() { return IdClasse; }
-    public void setIdClasse(String IdClasse) { this.IdClasse = IdClasse; }
+    public void setIdClasse(int IdClasse) { this.IdClasse = IdClasse; }
 
     public String getNumeroEleve() { return numeroEleve; }
     public void setNumeroEleve(String numeroEleve) { this.numeroEleve = numeroEleve; }
@@ -59,7 +48,7 @@ public class EleveModel {
     public void setAnneeScolaire(String anneeScolaire) { this.anneeScolaire = anneeScolaire; }
 
     public boolean getRedoublant() { return redoublant; }
-    public void setRedoublant(String redoublant) { this.redoublant = redoublant; }
+    public void setRedoublant(Boolean redoublant) { this.redoublant = redoublant; }
 
 
 }
