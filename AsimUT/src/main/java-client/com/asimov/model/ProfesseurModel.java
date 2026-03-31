@@ -9,9 +9,9 @@ public class ProfesseurModel {
     private int IdUtilisateur;
     private String matricule;
     private String specialite;
-    private Date dateEmbauche;
+    private String dateEmbauche;
 
-    public ProfesseurModel (int IdUtilisateur ,String matricule, String specialite, Date dateEmbauche) {
+    public ProfesseurModel (int IdUtilisateur ,String matricule, String specialite, String dateEmbauche) {
 
         this.IdUtilisateur = IdUtilisateur;
         this.matricule = matricule;
@@ -33,6 +33,6 @@ public class ProfesseurModel {
     public String getSpecialite() { return specialite; }
     public void setSpecialite(String specialite) { this.specialite = specialite; }
 
-    public Date getDateEmbauche() { return dateEmbauche; }
-    public void setDateEmbauche(Date dateEmbauche) { this.dateEmbauche = dateEmbauche; }
+    public String getDateEmbauche() { return dateEmbauche; }
+    public void setDateEmbauche(String dateEmbauche) { this.dateEmbauche = dateEmbauche; }
 }
