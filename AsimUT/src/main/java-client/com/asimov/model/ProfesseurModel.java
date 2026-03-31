@@ -11,7 +11,7 @@ public class ProfesseurModel {
     private String specialite;
     private String dateEmbauche;
 
-    public ProfesseurModel (int IdUtilisateur ,String matricule, String specialite, String dateEmbauche) {
+    public ProfesseurModel (String matricule, String specialite, String dateEmbauche) {
 
         this.IdUtilisateur = IdUtilisateur;
         this.matricule = matricule;
