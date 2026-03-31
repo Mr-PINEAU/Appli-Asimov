@@ -15,7 +15,7 @@ public class ClasseService {
 
     public List<ClasseModel> getAll() {
         try {
-            String json = api.get("/classes");
+            String json = api.get("/api/classes");
             return mapper.readValue(json, new TypeReference<List<ClasseModel>>() {});
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +26,7 @@ public class ClasseService {
     public void ajouter(ClasseModel classe) {
         try {
             String json = mapper.writeValueAsString(classe);
-            api.post("/classes", json);
+            api.post("/api/classes", json);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class ClasseService {
     public void modifier(ClasseModel classe) {
         try {
             String json = mapper.writeValueAsString(classe);
-            api.put("/classes/" + classe.getId_classe(), json);
+            api.put("/api/classes/" + classe.getId_classe(), json);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class ClasseService {
 
     public void supprimer(int id) {
         try {
-            api.delete("/classes/" + id);
+            api.delete("/api/classes/" + id);
         } catch (Exception e) {
             e.printStackTrace();
         }
