@@ -13,7 +13,6 @@ public class ProfesseurModel {
 
     public ProfesseurModel (String matricule, String specialite, String dateEmbauche) {
 
-        this.IdUtilisateur = IdUtilisateur;
         this.matricule = matricule;
         this.specialite = specialite;
         this.dateEmbauche = dateEmbauche;
