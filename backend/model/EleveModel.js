@@ -7,16 +7,12 @@ class Eleve {
   static async create(data) {
 
   const data = [
-    { id:1 , name: 'Dupont', firstname :'Alice', email: 'alice@dupont.com', date_naissance : '12/02/2004' },
-    { id:2 , name: 'Bob', firstname :'Léponge' , email: 'bob@léponge.com', date_naissance : '31/05/2006' },
-    { id:3 , name: 'Nordine', firstname :'Ateure' , email: 'nordine@ateure.com', date_naissance : '01/10/2003' } ,
-    { id:4 , name: 'Romain', firstname :'Loucot' , email: 'romain@loucot.com', date_naissance : '17/12/2004'} ,
-    { id:5 , name: 'Elisa', firstname :'Levaloit' , email: 'elisa@levaloit.com', date_naissance : '18/07/2004'}
+    {id:null, idUtilisateur:3, numeroEleve: 1, dateInscription: "2024-2025", statut: "actif", anneeScolaire: "2025-2026", redoublant: true},
 ];
 
     const sql = `
       INSERT INTO eleves
-      (nom, prenom, email, date_naissance)
+      (eleve_id, idUtilisateur, numeroEleve, dateInscription, statut, anneeScolaire, redoublant)
       VALUES (?, ?, ?, ?)
     `;
  
