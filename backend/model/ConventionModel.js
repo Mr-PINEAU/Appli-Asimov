@@ -6,7 +6,7 @@ class Convention {
   // Créer une convention
   static async create(data) {
 
-      const data = [
+      const seedData = [
     {idStage: 1, entreprise:"SARL Yannick TOTA", tuteur:"Albert", date_debut:"2025-05-25", date_fin:"2025-06-24", signature:true},
     {idStage: 3, entreprise:"Alma", tuteur:"Benoît", date_debut:"2025-01-20", date_fin:"2025-02-20", signature:true},
     {idStage: 2, entreprise:"Wizbii", tuteur:"Albert", date_debut:"2025-03-02", date_fin:"2025-04-04", signature:true},
@@ -22,7 +22,8 @@ class Convention {
       VALUES (?, ?, ?, ?, ?, ?)
     `;
 
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+      await db.execute(sql, [
       data.idStage,
       data.entreprise,
       data.tuteur,
@@ -30,6 +31,7 @@ class Convention {
       data.date_fin,
       data.signature
     ]);
+  }
 
     return result.insertId;
   }
