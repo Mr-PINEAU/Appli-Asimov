@@ -5,7 +5,7 @@ class Projet {
 
   // Créer un projet (validé par la commission - contrôle à faire dans le contrôleur)
   static async create(data) {
-    const data = [
+    const seedData = [
       
   {nomProjet:"Potager pédagogique", description:"Création et entretien d’un potager par les élèves pour apprendre l’écologie et l’agriculture.", dateDebut:"2025-03-01", dateFin:"2025-06-15", valideParCommission:true, statut:"en_cours", idResponsable:1},
   {nomProjet:"Journal du collège", description:"Rédaction d’un journal scolaire par les élèves avec des articles sur la vie du collège.", dateDebut:"2025-01-10", dateFin:"2025-05-30", valideParCommission:true, statut:"en_cours", idResponsable:2},
@@ -31,7 +31,8 @@ class Projet {
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+    await db.execute(sql, [
       data.nomProjet,
       data.description,
       data.dateDebut,
@@ -40,6 +41,7 @@ class Projet {
       data.statut,
       data.idResponsable
     ]);
+  }
 
     return result.insertId;
   }
