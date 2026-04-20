@@ -6,6 +6,20 @@ class Classe {
 //Créer une Classe
   static async create(data) {
 
+    const seedData = [
+      { niveau: 6, libelle: "6ème A" },
+      { niveau: 6, libelle: "6ème B" },
+      { niveau: 7, libelle: "5ème A" },
+      { niveau: 7, libelle: "5ème B" },
+      { niveau: 8, libelle: "4ème A" },
+      { niveau: 8, libelle: "4ème B" },
+      { niveau: 9, libelle: "3ème A" },
+      { niveau: 9, libelle: "3ème B" },
+      { niveau: 9, libelle: "3ème C" },
+      { niveau: 8, libelle: "4ème C" }
+    ];
+
+
 
     const sql = `
       INSERT INTO Classe
@@ -14,10 +28,12 @@ class Classe {
     `;
  
     //Retranscryptage des données par MYSQL2
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+    await db.execute(sql, [
       data.niveau,
       data.libelle
     ]);
+  }
 
     return result.insertId;
   }
