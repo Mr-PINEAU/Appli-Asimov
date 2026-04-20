@@ -6,7 +6,7 @@ class Eleve {
   //Créer un élève
   static async create(data) {
 
-  const data = [
+  const seedData = [
     {idUtilisateur: 1, idClasse: 2, numeroEleve:"ELV-2024-001", dateInscription: "2024-09-02", statut: "Actif", anneeScolaire: "2024/2025", redoublant: false},
     {idUtilisateur: 3, idClasse:3, numeroEleve:"ELV-2024-002", dateInscription: "2024-09-02", statut: "Actif",  anneeScolaire: "2024/2025", redoublant: true},
     {idUtilisateur: 2, idClasse: 1, numeroEleve:"ELV-2024-003", dateInscription: "2024-09-02", statut: "Actif", anneeScolaire: "2024/2025", redoublant: true},
@@ -23,7 +23,8 @@ class Eleve {
     `;
 
     //Retranscryptage des données par MYSQL2
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+       await db.execute(sql, [
       data.idUtilisateur,
       data.idClasse,
       data.numeroEleve,
@@ -32,6 +33,7 @@ class Eleve {
       data.anneeScolaire,
       data.redoublant
     ]);
+  }
 
     return result.insertId;
   }
