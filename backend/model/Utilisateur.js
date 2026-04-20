@@ -7,7 +7,7 @@ class Utilisateur {
 // Ne pas oublier d'adapter les champs de la table utilisateur avec ceux de ma modélisation Merise (looping)
   static async create(data) {
 
-  const data = [
+  const seedData = [
     {idUtilisateur: 1, idRole: 1, nom: "Laméche", prenom:"Jean",adresse: "12 Rue de la Paix, Paris",telephone: "0601020304", email: "j.laméche@college.com", mot_de_passe:"hashed_password_1",actif:"TRUE"},
     {idUtilisateur: 2, idRole: 2, nom: "Legout", prenom:"Benoit", adresse: "9 rue Charle de Gaulle, Paris", telephone: "0612233445", email: "b.legout@college.com", mot_de_passe:"hashed_password_2",actif: true},
     {idUtilisateur: 3, idRole: 3, nom: "Lemaitre", prenom:"Christophe",adresse: "1 Avenue des Champs-Élysées, Paris",telephone: "0634455667", email: "c.lemaitre@college.com", mot_de_passe:"hashed_password_4", actif:true},
@@ -24,7 +24,8 @@ class Utilisateur {
     `;
  
     //Retranscryptage des données par MYSQL2
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) { 
+      await db.execute(sql, [
       data.idUtilisateur,
       data.idRole,
       data.nom,
@@ -35,6 +36,7 @@ class Utilisateur {
       data.mot_de_passe,
       data.actif
     ]);
+  }
 
     return result.insertId;
   }
