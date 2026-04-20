@@ -19,5 +19,5 @@ pool.getConnection()
     console.error("Erreur de connexion à la base de données :", error.message);
   });
 
-module.exports = db;
+module.exports = pool;
 
