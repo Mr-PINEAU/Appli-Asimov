@@ -7,7 +7,7 @@ class Professeur {
   static async create(data) {
  
   // Jeu de données
-  const data = [
+  const seedData = [
   {id: 1, idUtilisateur: 2, matricule:"02134569", specialite:"Mathematique", dateEmbauche:"2022-08-20"},
   {id: 2, idUtilisateur: 1, matricule:"10134469", specialite:"Français", dateEmbauche:"2022-09-20" },
   {id: 3, idUtilisateur: 4, matricule:"14135461", specialite:"Géographie", dateEmbauche:"2021-07-23"},
@@ -27,13 +27,15 @@ class Professeur {
     `;
  
     //Retranscryptage des données par MYSQL2
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+      await db.execute(sql, [
       data.id,
       data.idUtilisateur,
       data.matricule,
       data.specialite,
       data.dateEmbauche
     ]);
+  }
 
     return result.insertId;
   }
