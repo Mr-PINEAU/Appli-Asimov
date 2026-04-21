@@ -1,16 +1,9 @@
-require("dotenv").config();
-console.log(process.env.DB_HOST);
+// server.js — ordre correct
+require("dotenv").config(); // ← ABSOLUMENT EN PREMIER, avant tout le reste
 
-
-// Importer Express
-const express = require ('express');
-
-// Créer l'application Express
+const express = require('express');
 const app = express();
-
-
-// Définir le port
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware pour parser le JSON
 
