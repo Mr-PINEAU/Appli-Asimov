@@ -6,7 +6,7 @@ class HistoriqueClasse {
   // Créer un historique de classe pour un élève
   static async create(data) {
 
-    const data = [
+    const seedData = [
       {idEleve: 1, idClasse: 3, anneeScolaire: "2022-2023", semestre: 1, moyenneGenerale: 14.5, dateDebut: "2022-09-01", dateFin: "2023-01-31", statut: "valide"},
       {idEleve: 2, idClasse: 3, anneeScolaire: "2022-2023", semestre: 1, moyenneGenerale: 12.8, dateDebut: "2022-09-01", dateFin: "2023-01-31", statut: "valide"},
       {idEleve: 3, idClasse: 3, anneeScolaire: "2022-2023", semestre: 1, moyenneGenerale: 9.7, dateDebut: "2022-09-01", dateFin: "2023-01-31", statut: "redouble"},
@@ -29,7 +29,8 @@ class HistoriqueClasse {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const [result] = await db.execute(sql, [
+    for (const sql of seedData) {
+    await db.execute(sql, [
       data.idEleve,
       data.idClasse,
       data.anneeScolaire,
@@ -39,6 +40,7 @@ class HistoriqueClasse {
       data.dateFin,
       data.statut
     ]);
+  }
 
     return result.insertId;
   }
