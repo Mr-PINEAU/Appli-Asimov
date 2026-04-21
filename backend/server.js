@@ -1,6 +1,10 @@
 // server.js — ordre correct
 require("dotenv").config(); // ← ABSOLUMENT EN PREMIER, avant tout le reste
 
+const fs = require('fs')
+const https = require('https')
+const path = require('path')
+
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
