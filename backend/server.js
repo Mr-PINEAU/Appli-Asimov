@@ -2,7 +2,7 @@
 const express = require ('express');
 
 // Créer l'application Express
-const express = express();
+const app = express();
 
 //Importation de dotenv pour les variables d'environement
 require("dotenv").config();
