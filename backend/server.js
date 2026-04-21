@@ -1,12 +1,13 @@
+require("dotenv").config();
+console.log(process.env.DB_HOST);
+
+
 // Importer Express
 const express = require ('express');
 
 // Créer l'application Express
 const app = express();
 
-//Importation de dotenv pour les variables d'environement
-require("dotenv").config();
-console.log(process.env.DB_HOST);
 
 // Définir le port
 const PORT = 3000;
