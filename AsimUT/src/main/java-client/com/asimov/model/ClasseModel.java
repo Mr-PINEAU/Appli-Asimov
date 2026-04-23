@@ -17,11 +17,12 @@ public class ClasseModel {
 
 
     public int getId_classe() { return id_classe; }
-    public void setId_classe(int id_classe) { this.id_classe = id_classe; }
 
     public String getNiveau() { return niveau; }
     public void setNiveau(String niveau) { this.niveau = niveau; }
 
     public String getLibelle() { return libelle; }
     public void setLibelle(String libelle) { this.libelle = libelle; }
+
+
 }
