@@ -5,9 +5,16 @@ const fs = require('fs')
 const https = require('https')
 const path = require('path')
 
+const cors = require('cors') // Cross Origin Resource Sharing
+const morgan = require('morgan') // logs pour authentification par token
+
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Utilisation des middlewares pour l'authentification
+app.use(cors())
+app.use(morgan('tiny'))
 
 // Middleware pour parser le JSON
 
@@ -18,9 +25,13 @@ app.get('/', (req, res) => {
   res.send('Bienvenue sur le serveur Express !');
 });
 
+const key = fs.readFileSync(path.join(__dirname, 'certificate', 'server.key'));
+const cert = fs.readFileSync(path.join(__dirname, 'certificate', 'server.cert'));
+const options = { key, cert };
+
 // Démarrer le serveur
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`Serveur démarré sur https://localhost:${PORT}`);
 });
 
 //  Importation des Routes
@@ -50,3 +61,4 @@ app.use((req, res) => {
     message: "Route introuvable"
   });
 });
+
