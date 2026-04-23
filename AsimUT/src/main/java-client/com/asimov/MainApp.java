@@ -1,32 +1,29 @@
 package com.asimov;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.asimov.api.ApiClient;
 
-public class Main extends Application {
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+import static com.asimov.api.ApiClient.BASE_URL;
 
-        // Charger la fenêtre de connexion
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Login.fxml"));
-
-        Scene scene = new Scene(loader.load(), 600, 400);
-
-        // Titre de la fenêtre
-        stage.setTitle("Application Asimov - Collège");
-
-        // Empêcher le redimensionnement
-        stage.setResizable(false);
-
-        stage.setScene(scene);
-        stage.show();
-    }
+public class MainApp {
 
     public static void main(String[] args) {
-        launch(args);
+        System.out.println("Application démarrée !");
+
+        ApiClient api = new ApiClient();
+
+        try {
+            String response = api.put("/test", "{\"name\":\"Asim\"}");
+            System.out.println(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
+
 }
+
