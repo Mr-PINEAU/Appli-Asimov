@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.asimov.controller.ConventionController"
+      spacing="10"
+      style="-fx-padding: 15;">
+
+    <Label text="Gestion des Conventions" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+    <!-- Tableau -->
+    <TableView fx:id="tableConventions" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colEntreprise" text="Entreprise" prefWidth="150"/>
+            <TableColumn fx:id="colTuteur" text="Tuteur" prefWidth="120"/>
+            <TableColumn fx:id="colAdresse" text="Adresse" prefWidth="150"/>
+            <TableColumn fx:id="colTelephone" text="Téléphone" prefWidth="110"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="150"/>
+            <TableColumn fx:id="colDateDebut" text="Date Début" prefWidth="100"/>
+            <TableColumn fx:id="colDateFin" text="Date Fin" prefWidth="100"/>
+            <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+            <TableColumn fx:id="colSignature" text="Signature" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+    <!-- Formulaire -->
+    <GridPane hgap="10" vgap="8">
+
+        <Label text="Entreprise :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="entrepriseField" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="200"/>
+
+        <Label text="Tuteur :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="tuteurField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Adresse :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="adresseField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Téléphone :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="telephoneField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Email :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="emailField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="ID Stage :" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <TextField fx:id="idStageField" GridPane.rowIndex="0" GridPane.columnIndex="3" prefWidth="200"/>
+
+        <Label text="ID Élève :" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <TextField fx:id="idEleveField" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+        <Label text="ID Prof. Référent :" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <TextField fx:id="idProfesseurReferentField" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+        <Label text="Date Début :" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="dateDebutField" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+
+        <Label text="Date Fin :" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="dateFinField" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+
+        <Label text="Signature :" GridPane.rowIndex="5" GridPane.columnIndex="2"/>
+        <CheckBox fx:id="signatureCheckBox" GridPane.rowIndex="5" GridPane.columnIndex="3"/>
+
+    </GridPane>
+
+    <!-- Boutons -->
+    <HBox spacing="10">
+        <Button text="Ajouter" onAction="#ajouter" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Modifier" onAction="#modifier" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="Valider" onAction="#valider" style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
+        <Button text="Supprimer" onAction="#supprimer" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+        <Button text="Actualiser" onAction="#charger" style="-fx-background-color: #9E9E9E; -fx-text-fill: white;"/>
+    </HBox>
+
+</VBox>

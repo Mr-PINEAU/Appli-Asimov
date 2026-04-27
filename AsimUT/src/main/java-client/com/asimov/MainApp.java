@@ -1,4 +1,4 @@
-package com.asimov.api;
+package com.asimov;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,17 +10,17 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Charger la vue initiale (ex: login ou dashboard)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/eleves.fxml"));
         Parent root = loader.load();
 
         primaryStage.setTitle("Gestion de Suivi d'Élèves");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 1100, 650));
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(500);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
-        launch(args); // C'est ici que la magie JavaFX commence
+        launch(args);
     }
 }
-

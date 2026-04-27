@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -42,7 +42,10 @@
 
 
     <build>
+        <sourceDirectory>src/main/java-client</sourceDirectory>
         <plugins>
+
+
 
             <!-- Plugin JavaFX pour lancer l'application -->
             <plugin>
@@ -50,7 +53,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.asimov.api.ApiClient</mainClass>
+                    <mainClass>com.asimov.MainApp</mainClass>
                 </configuration>
             </plugin>
 
@@ -62,7 +65,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.asimov.api.ApiClient</mainClass>
+                            <mainClass>com.asimov.MainApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
