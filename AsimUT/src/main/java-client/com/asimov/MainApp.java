@@ -1,29 +1,26 @@
-package com.asimov;
+package com.asimov.api;
 
-import com.asimov.api.ApiClient;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+public class MainApp extends Application {
 
-import static com.asimov.api.ApiClient.BASE_URL;
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Charger la vue initiale (ex: login ou dashboard)
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+        Parent root = loader.load();
 
-public class MainApp {
-
-    public static void main(String[] args) {
-        System.out.println("Application démarrée !");
-
-        ApiClient api = new ApiClient();
-
-        try {
-            String response = api.put("/test", "{\"name\":\"Asim\"}");
-            System.out.println(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        primaryStage.setTitle("Gestion de Suivi d'Élèves");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
-
+    public static void main(String[] args) {
+        launch(args); // C'est ici que la magie JavaFX commence
+    }
 }
 
