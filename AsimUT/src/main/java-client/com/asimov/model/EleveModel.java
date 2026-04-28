@@ -1,39 +1,68 @@
 package com.asimov.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class EleveModel {
 
-    private int IdEleve;
-    private int IdUtilisateur;
-    private int IdClasse;
+    // ✅ Tous en minuscule
+    @JsonProperty("idEleve")
+    private int idEleve;
+
+    @JsonProperty("idUtilisateur")
+    private int idUtilisateur;
+
+    @JsonProperty("idClasse")
+    private int idClasse;
+
+    @JsonProperty("numeroEleve")
     private String numeroEleve;
+
+    @JsonProperty("dateInscription")
     private String dateInscription;
+
+    @JsonProperty("statut")
     private String actif;
+
+    @JsonProperty("anneeScolaire")
     private String anneeScolaire;
-    private boolean redoublant;
 
-    // Creation d'un nouvel eleves
-    public EleveModel (int IdUtilisateur, int IdClasse, String numeroEleve, String dateInscription, String actif, String anneeScolairee, boolean redoublant) {
+    @JsonProperty("redoublant")
+    private int redoublant;
 
-        this.IdUtilisateur = IdUtilisateur;
-        this.IdClasse = IdClasse;
-        this.numeroEleve = numeroEleve;
+    // ✅ Constructeur vide obligatoire pour Jackson
+    public EleveModel() {}
+
+    // ✅ Constructeur complet (chargement depuis serveur)
+    public EleveModel(int idEleve, int idUtilisateur, int idClasse,
+                      String numeroEleve, String dateInscription,
+                      String actif, String anneeScolaire, int redoublant) {
+        this.idEleve       = idEleve;
+        this.idUtilisateur = idUtilisateur;
+        this.idClasse      = idClasse;
+        this.numeroEleve   = numeroEleve;
         this.dateInscription = dateInscription;
-        this.actif = actif;
-        this.anneeScolaire = anneeScolairee;
-        this.redoublant = redoublant;
+        this.actif         = actif;
+        this.anneeScolaire = anneeScolaire;
+        this.redoublant    = redoublant;
     }
 
-    public EleveModel(String numeroEleve, String text, String text1, String text2, boolean selected) {
+    // ✅ Constructeur création (sans idEleve, généré par le serveur)
+    public EleveModel(int idUtilisateur, int idClasse, String numeroEleve,
+                      String dateInscription, String actif,
+                      String anneeScolaire, int redoublant) {
+        this(0, idUtilisateur, idClasse, numeroEleve,
+                dateInscription, actif, anneeScolaire, redoublant);
     }
 
-    public int getIdEleve() { return IdEleve; }
-    public void setIdEleve(int IdEleve) { this.IdEleve = IdEleve; }
+    // ✅ Getters / Setters — tous en minuscule
+    public int getIdEleve() { return idEleve; }
+    public void setIdEleve(int idEleve) { this.idEleve = idEleve; }
 
-    public int getIdUtilisateur() { return IdUtilisateur; }
-    public void setIdUtilisateur(int IdUtilisateur) { this.IdUtilisateur = IdUtilisateur; }
+    public int getIdUtilisateur() { return idUtilisateur; }
+    public void setIdUtilisateur(int idUtilisateur) { this.idUtilisateur = idUtilisateur; }
 
-    public int getIdClasse() { return IdClasse; }
-    public void setIdClasse(int IdClasse) { this.IdClasse = IdClasse; }
+    public int getIdClasse() { return idClasse; }
+    public void setIdClasse(int idClasse) { this.idClasse = idClasse; }
 
     public String getNumeroEleve() { return numeroEleve; }
     public void setNumeroEleve(String numeroEleve) { this.numeroEleve = numeroEleve; }
@@ -47,8 +76,6 @@ public class EleveModel {
     public String getAnneeScolaire() { return anneeScolaire; }
     public void setAnneeScolaire(String anneeScolaire) { this.anneeScolaire = anneeScolaire; }
 
-    public boolean getRedoublant() { return redoublant; }
-    public void setRedoublant(Boolean redoublant) { this.redoublant = redoublant; }
-
-
+    public int getRedoublant() { return redoublant; }
+    public void setRedoublant(int redoublant) { this.redoublant = redoublant; }
 }

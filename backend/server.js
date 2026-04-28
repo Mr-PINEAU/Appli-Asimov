@@ -2,7 +2,6 @@
 require("dotenv").config(); // ← ABSOLUMENT EN PREMIER, avant tout le reste
 
 
-
 const cors = require('cors') // Cross Origin Resource Sharing
 const morgan = require('morgan') // logs pour authentification par token
 
@@ -22,7 +21,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Bienvenue sur le serveur Express !');
 });
-
 
 
 // Démarrer le serveur

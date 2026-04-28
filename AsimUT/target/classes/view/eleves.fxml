@@ -32,19 +32,21 @@
             </HBox>
 
             <!-- TableView -->
-            <TableView fx:id="tableEleves" VBox.vgrow="ALWAYS"
-                       style="-fx-background-color: white;">
+            <TableView fx:id="tableEleves" VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-border-color: #ddd;">
                 <columns>
-                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-                    <TableColumn fx:id="colNumero" text="N° Élève" prefWidth="120"/>
-                    <TableColumn fx:id="colIdClasse" text="Classe" prefWidth="80"/>
-                    <TableColumn fx:id="colDateInscription" text="Date Inscription" prefWidth="150"/>
-                    <TableColumn fx:id="colAnneeScolaire" text="Année Scolaire" prefWidth="130"/>
-                    <TableColumn fx:id="colActif" text="Actif" prefWidth="80"/>
-                    <TableColumn fx:id="colRedoublant" text="Redoublant" prefWidth="100"/>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+                    <TableColumn fx:id="colNumero" text="N° Élève" prefWidth="120" />
+                    <TableColumn fx:id="colIdClasse" text="ID Classe" prefWidth="80" />
+                    <TableColumn fx:id="colDateInscription" text="Date Inscription" prefWidth="130" />
+                    <TableColumn fx:id="colStatut" text="Statut" prefWidth="100" />
+                    <TableColumn fx:id="colAnneeScolaire" text="Année Scolaire" prefWidth="130" />
+                    <TableColumn fx:id="colRedoublant" text="Redoublant" prefWidth="100" />
                 </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
                 <placeholder>
-                    <Label text="Aucun élève trouvé"/>
+                    <Label text="Aucun élève trouvé (Vérifiez la connexion au serveur Node.js)" />
                 </placeholder>
             </TableView>
 

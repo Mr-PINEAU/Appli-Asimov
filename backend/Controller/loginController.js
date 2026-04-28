@@ -1,5 +1,10 @@
 // Contient la logique nécessaire à l'authentification
 const jwt = require('jsonwebtoken') // ajout token sécurisé
+exports.login = (req, res) => {
+    // Vérification mot de passe...
+    const token = jwt.sign({ id: 1, role: 'proviseur' }, 'SECRET_KEY');
+    res.json({ token });
+};
 const SECRET = 'appKey' // normal. dans un fichier de conf.
 var loginController={
 login(req,res){

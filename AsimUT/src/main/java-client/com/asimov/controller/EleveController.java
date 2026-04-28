@@ -101,7 +101,7 @@ public class EleveController {
         fieldDateInscription.setText(selectionne.getDateInscription());
         fieldAnneeScolaire.setText(selectionne.getAnneeScolaire());
         comboActif.setValue(selectionne.getActif());
-        checkRedoublant.setSelected(selectionne.getRedoublant());
+        checkRedoublant.setSelected(selectionne.getRedoublant() == 1);
 
         afficherFormulaire(true);
     }
@@ -119,7 +119,12 @@ public class EleveController {
         String date = fieldDateInscription.getText();
         String annee = fieldAnneeScolaire.getText();
         String actif = comboActif.getValue() != null ? comboActif.getValue() : "non";
-        boolean redoublant = checkRedoublant.isSelected();
+        int redoublant = checkRedoublant.isSelected() ? 1 : 0;
+
+        System.out.println("=== ENREGISTRER ===");
+        System.out.println("Mode : " + (eleveEnCoursModification == null ? "AJOUT" : "MODIFICATION"));
+        System.out.println("Numero: " + numero + " | Classe: " + idClasse);
+
 
         if (eleveEnCoursModification == null) {
             // AJOUT
@@ -142,6 +147,7 @@ public class EleveController {
 
         afficherFormulaire(false);
         chargerEleves();
+
     }
 
     @FXML

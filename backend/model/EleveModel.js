@@ -6,16 +6,6 @@ class Eleve {
   //Créer un élève
   static async create(data) {
 
-  const seedData = [
-    {idUtilisateur: 1, idClasse: 2, numeroEleve:"ELV-2024-001", dateInscription: "2024-09-02", statut: "Actif", anneeScolaire: "2024/2025", redoublant: false},
-    {idUtilisateur: 3, idClasse:3, numeroEleve:"ELV-2024-002", dateInscription: "2024-09-02", statut: "Actif",  anneeScolaire: "2024/2025", redoublant: true},
-    {idUtilisateur: 2, idClasse: 1, numeroEleve:"ELV-2024-003", dateInscription: "2024-09-02", statut: "Actif", anneeScolaire: "2024/2025", redoublant: true},
-    {idUtilisateur: 4, idClasse:4, numeroEleve:"ELV-2024-004", dateInscription: "2024-09-02", statut: "Suspendu",  anneeScolaire: "2024/2025", redoublant: false},
-    {idUtilisateur: 2, idClasse: 4, numeroEleve:"ELV-2024-005", dateInscription: "2024-09-02", statut: "Actif", anneeScolaire: "2024/2025", redoublant: false},
-    {idUtilisateur: 1, idClasse: 5, numeroEleve:"ELV-2024-006", dateInscription: "2024-09-02", statut: "Transféré", anneeScolaire: "2024/2025", redoublant: false},
-
-  ];
-
     const sql = `
       INSERT INTO eleves
       (idUtilisateur, idClasse, numeroEleve, dateInscription, statut, anneeScolaire, redoublant)
@@ -23,8 +13,7 @@ class Eleve {
     `;
 
     //Retranscryptage des données par MYSQL2
-    for (const sql of seedData) {
-       await db.execute(sql, [
+    const [result] = await db.execute(sql, [
       data.idUtilisateur,
       data.idClasse,
       data.numeroEleve,
@@ -33,7 +22,7 @@ class Eleve {
       data.anneeScolaire,
       data.redoublant
     ]);
-  }
+  
 
     return result.insertId;
   }
