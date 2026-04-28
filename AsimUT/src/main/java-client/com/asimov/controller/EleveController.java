@@ -21,7 +21,7 @@ public class EleveController {
     @FXML private TableColumn<EleveModel, Integer> colIdClasse;
     @FXML private TableColumn<EleveModel, String>  colDateInscription;
     @FXML private TableColumn<EleveModel, String>  colAnneeScolaire;
-    @FXML private TableColumn<EleveModel, String>  colActif;
+    @FXML private TableColumn<EleveModel, String>  colStatut;
     @FXML private TableColumn<EleveModel, Boolean> colRedoublant;
 
     // --- Formulaire ---
@@ -50,7 +50,7 @@ public class EleveController {
         colIdClasse.setCellValueFactory(new PropertyValueFactory<>("idClasse"));
         colDateInscription.setCellValueFactory(new PropertyValueFactory<>("dateInscription"));
         colAnneeScolaire.setCellValueFactory(new PropertyValueFactory<>("anneeScolaire"));
-        colActif.setCellValueFactory(new PropertyValueFactory<>("actif"));
+        colStatut.setCellValueFactory(new PropertyValueFactory<>("actif"));
         colRedoublant.setCellValueFactory(new PropertyValueFactory<>("redoublant"));
 
         comboActif.setItems(FXCollections.observableArrayList("oui", "non"));
