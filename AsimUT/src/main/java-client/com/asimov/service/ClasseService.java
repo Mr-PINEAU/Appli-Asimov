@@ -10,8 +10,17 @@ import java.util.List;
 
 public class ClasseService {
 
-    private final ApiClient api = new ApiClient();
+    private final ApiClient api ;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    // ← constructeur qui gère l'exception
+    public ClasseService() {
+        try {
+            this.api = new ApiClient();
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible d'initialiser ApiClient", e);
+        }
+    }
 
     public List<ClasseModel> getAll() {
         try {
