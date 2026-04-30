@@ -49,6 +49,23 @@ public class EleveController {
         colStatut.setCellValueFactory(new PropertyValueFactory<>("actif"));
         colRedoublant.setCellValueFactory(new PropertyValueFactory<>("redoublant"));
 
+        // ✅ 1. Cacher ID et ID Classe
+        colId.setVisible(false);
+        colIdClasse.setVisible(false);
+
+        // ✅ 2. Redoublant affiche "Oui" ou "Non"
+        colRedoublant.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item == 1 ? "✅ Oui" : "Non");
+                }
+            }
+        });
+
         comboActif.setItems(FXCollections.observableArrayList(
                 "Inscrit", "En attente", "Radié", "Transféré"
         ));
@@ -108,7 +125,8 @@ public class EleveController {
         titreForm.setText("✏️ Modifier l'élève");
         fieldNumero.setText(selectionne.getNumeroEleve());
         fieldIdClasse.setText(String.valueOf(selectionne.getIdClasse()));
-        fieldDateInscription.setText(selectionne.getDateInscription());
+        String dateClean = selectionne.getDateInscription() != null ? selectionne.getDateInscription().split("T")[0] : "";
+        fieldDateInscription.setText(dateClean);
         fieldAnneeScolaire.setText(selectionne.getAnneeScolaire());
         comboActif.setValue(selectionne.getActif());
         checkRedoublant.setSelected(selectionne.getRedoublant() == 1);
@@ -124,8 +142,8 @@ public class EleveController {
         }
 
         String numero  = fieldNumero.getText();
-        int idClasse   = Integer.parseInt(fieldIdClasse.getText().isEmpty() ? "0" : fieldIdClasse.getText());
-        String date    = fieldDateInscription.getText();
+        int idClasse = fieldIdClasse.getText().isEmpty() ? 1 : Integer.parseInt(fieldIdClasse.getText());
+        String date = fieldDateInscription.getText().split("T")[0]; // ✅ garde seulement "2024-09-01"
         String annee   = fieldAnneeScolaire.getText();
         String actif   = comboActif.getValue() != null ? comboActif.getValue() : "Inscrit";
         int redoublant = checkRedoublant.isSelected() ? 1 : 0;

@@ -74,8 +74,8 @@
             <Label text="N° Élève"/>
             <TextField fx:id="fieldNumero" promptText="Ex: EL-2024-001"/>
 
-            <Label text="ID Classe"/>
-            <TextField fx:id="fieldIdClasse" promptText="Ex: 3"/>
+            <Label text="ID Classe" visible="false" managed="false"/>
+            <TextField fx:id="fieldIdClasse" promptText="Ex: 3" visible="false" managed="false"/>
 
             <Label text="Date Inscription"/>
             <TextField fx:id="fieldDateInscription" promptText="Ex: 2024-09-01"/>
