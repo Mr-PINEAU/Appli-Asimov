@@ -1,11 +1,13 @@
 // server.js — ordre correct
 require("dotenv").config(); // ← ABSOLUMENT EN PREMIER, avant tout le reste
 
-
+const https = require('https');
+const fs = require('fs');
+const express = require('express');
 const cors = require('cors') // Cross Origin Resource Sharing
 const morgan = require('morgan') // logs pour authentification par token
 
-const express = require('express');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -23,10 +25,6 @@ app.get('/', (req, res) => {
 });
 
 
-// Démarrer le serveur
- app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
-});
 
 //  Importation des Routes
 // -------------------------------------------------------
@@ -56,3 +54,11 @@ app.use((req, res) => {
   });
 });
 
+const options = {
+  key:  fs.readFileSync('./certificate/key.pem'),
+  cert: fs.readFileSync('./certificate/cert.pem'),
+};
+
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`✅ HTTPS server running on port ${PORT}`);
+});
