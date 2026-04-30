@@ -1,33 +1,18 @@
 package com.asimov.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.beans.property.*;
 
 public class EleveModel {
 
-    // ✅ Tous en minuscule
-    @JsonProperty("idEleve")
-    private int idEleve;
-
-    @JsonProperty("idUtilisateur")
-    private int idUtilisateur;
-
-    @JsonProperty("idClasse")
-    private int idClasse;
-
-    @JsonProperty("numeroEleve")
-    private String numeroEleve;
-
-    @JsonProperty("dateInscription")
-    private String dateInscription;
-
-    @JsonProperty("statut")
-    private String actif;
-
-    @JsonProperty("anneeScolaire")
-    private String anneeScolaire;
-
-    @JsonProperty("redoublant")
-    private int redoublant;
+    private final IntegerProperty idEleve = new SimpleIntegerProperty();
+    private final IntegerProperty idUtilisateur = new SimpleIntegerProperty();
+    private final IntegerProperty idClasse = new SimpleIntegerProperty();
+    private final StringProperty numeroEleve = new SimpleStringProperty();
+    private final StringProperty dateInscription = new SimpleStringProperty();
+    private final StringProperty actif = new SimpleStringProperty();
+    private final StringProperty anneeScolaire = new SimpleStringProperty();
+    private final IntegerProperty redoublant = new SimpleIntegerProperty();
 
     // ✅ Constructeur vide obligatoire pour Jackson
     public EleveModel() {}
@@ -36,15 +21,19 @@ public class EleveModel {
     public EleveModel(int idEleve, int idUtilisateur, int idClasse,
                       String numeroEleve, String dateInscription,
                       String actif, String anneeScolaire, int redoublant) {
-        this.idEleve       = idEleve;
-        this.idUtilisateur = idUtilisateur;
-        this.idClasse      = idClasse;
-        this.numeroEleve   = numeroEleve;
-        this.dateInscription = dateInscription;
-        this.actif         = actif;
-        this.anneeScolaire = anneeScolaire;
-        this.redoublant    = redoublant;
+// On utilise les setters que nous avons créés plus bas
+        // ou directement .set() sur les properties
+        setIdEleve(idEleve);
+        setIdUtilisateur(idUtilisateur);
+        setIdClasse(idClasse);
+        setNumeroEleve(numeroEleve);
+        setDateInscription(dateInscription);
+        setActif(actif);
+        setAnneeScolaire(anneeScolaire);
+        setRedoublant(redoublant);
     }
+
+
 
     // ✅ Constructeur création (sans idEleve, généré par le serveur)
     public EleveModel(int idUtilisateur, int idClasse, String numeroEleve,
@@ -54,28 +43,53 @@ public class EleveModel {
                 dateInscription, actif, anneeScolaire, redoublant);
     }
 
-    // ✅ Getters / Setters — tous en minuscule
-    public int getIdEleve() { return idEleve; }
-    public void setIdEleve(int idEleve) { this.idEleve = idEleve; }
+    // --- ID ELEVE ---
+    @JsonProperty("idEleve")
+    public int getIdEleve() { return idEleve.get(); }
+    public void setIdEleve(int val) { this.idEleve.set(val); }
+    public IntegerProperty idEleveProperty() { return idEleve; }
 
-    public int getIdUtilisateur() { return idUtilisateur; }
-    public void setIdUtilisateur(int idUtilisateur) { this.idUtilisateur = idUtilisateur; }
+    // --- ID UTILISATEUR ---
+    @JsonProperty("idUtilisateur")
+    public int getIdUtilisateur() { return idUtilisateur.get(); }
+    public void setIdUtilisateur(int val) { this.idUtilisateur.set(val); }
+    public IntegerProperty idUtilisateurProperty() { return idUtilisateur; }
 
-    public int getIdClasse() { return idClasse; }
-    public void setIdClasse(int idClasse) { this.idClasse = idClasse; }
+    // --- ID CLASSE ---
+    @JsonProperty("idClasse")
+    public int getIdClasse() { return idClasse.get(); }
+    public void setIdClasse(int val) { this.idClasse.set(val); }
+    public IntegerProperty idClasseProperty() { return idClasse; }
 
-    public String getNumeroEleve() { return numeroEleve; }
-    public void setNumeroEleve(String numeroEleve) { this.numeroEleve = numeroEleve; }
+    // --- NUMERO ELEVE ---
+    @JsonProperty("numeroEleve")
+    public String getNumeroEleve() { return numeroEleve.get(); }
+    public void setNumeroEleve(String val) { this.numeroEleve.set(val); }
+    public StringProperty numeroEleveProperty() { return numeroEleve; }
 
-    public String getDateInscription() { return dateInscription; }
-    public void setDateInscription(String dateInscription) { this.dateInscription = dateInscription; }
+    // --- DATE INSCRIPTION ---
+    @JsonProperty("dateInscription")
+    public String getDateInscription() { return dateInscription.get(); }
+    public void setDateInscription(String val) { this.dateInscription.set(val); }
+    public StringProperty dateInscriptionProperty() { return dateInscription; }
 
-    public String getActif() { return actif; }
-    public void setActif(String actif) { this.actif = actif; }
+    // --- STATUT (ACTIF) ---
+    @JsonProperty("statut")
+    public String getActif() { return actif.get(); }
+    public void setActif(String val) { this.actif.set(val); }
+    public StringProperty actifProperty() { return actif; }
 
-    public String getAnneeScolaire() { return anneeScolaire; }
-    public void setAnneeScolaire(String anneeScolaire) { this.anneeScolaire = anneeScolaire; }
+    // --- ANNEE SCOLAIRE ---
+    @JsonProperty("anneeScolaire")
+    public String getAnneeScolaire() { return anneeScolaire.get(); }
+    public void setAnneeScolaire(String val) { this.anneeScolaire.set(val); }
+    public StringProperty anneeScolaireProperty() { return anneeScolaire; }
 
-    public int getRedoublant() { return redoublant; }
-    public void setRedoublant(int redoublant) { this.redoublant = redoublant; }
+    // --- REDOUBLANT ---
+    @JsonProperty("redoublant")
+    public int getRedoublant() { return redoublant.get(); }
+    public void setRedoublant(int val) { this.redoublant.set(val); }
+    public IntegerProperty redoublantProperty() { return redoublant; }
 }
+
+
