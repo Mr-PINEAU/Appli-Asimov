@@ -10,15 +10,28 @@ import java.util.List;
 
 public class EleveService {
 
-    private final ApiClient api = new ApiClient();
+    private final ApiClient api;  // ← plus d'initialisation ici
     private final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+    // ← constructeur qui gère l'exception
+    public EleveService() {
+        try {
+            this.api = new ApiClient();
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible d'initialiser ApiClient", e);
+        }
+    }
 
     public List<EleveModel> getAll() {
         try {
             String json = api.get("/api/eleves");
+            System.out.println("=== RÉPONSE /api/eleves ===");
+            System.out.println(json);
             return mapper.readValue(json, new TypeReference<List<EleveModel>>() {});
         } catch (Exception e) {
+            System.out.println("=== ERREUR getAll ===");
+            System.out.println(e.getMessage()); // ← voir l'erreur exacte
             e.printStackTrace();
             return List.of();
         }

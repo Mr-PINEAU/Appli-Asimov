@@ -9,8 +9,17 @@ import java.util.List;
 
 public class ProfesseurService {
 
-    private final ApiClient api = new ApiClient();
+    private final ApiClient api ;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    // ← constructeur qui gère l'exception
+    public ProfesseurService() {
+        try {
+            this.api = new ApiClient();
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible d'initialiser ApiClient", e);
+        }
+    }
 
     public List<ProfesseurModel> getAll() {
         try {

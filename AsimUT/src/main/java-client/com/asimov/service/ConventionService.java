@@ -9,8 +9,17 @@ import java.util.List;
 
 public class ConventionService {
 
-    private final ApiClient api = new ApiClient();
+    private final ApiClient api ;
     private final ObjectMapper mapper = new ObjectMapper();
+
+    // ← constructeur qui gère l'exception
+    public ConventionService() {
+        try {
+            this.api = new ApiClient();
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible d'initialiser ApiClient", e);
+        }
+    }
 
     // Récupérer toutes les conventions (proviseur, secrétariat)
     public List<ConventionModel> getAll() {
