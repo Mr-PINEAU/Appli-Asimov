@@ -2,6 +2,7 @@ package com.asimov.controller;
 
 import com.asimov.model.EleveModel;
 import com.asimov.service.EleveService;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import java.util.stream.Collectors;
 
 public class EleveController {
 
-    // --- Tableau ---
     @FXML private TableView<EleveModel> tableEleves;
     @FXML private TableColumn<EleveModel, Integer> colId;
     @FXML private TableColumn<EleveModel, String>  colNumero;
@@ -22,9 +22,8 @@ public class EleveController {
     @FXML private TableColumn<EleveModel, String>  colDateInscription;
     @FXML private TableColumn<EleveModel, String>  colAnneeScolaire;
     @FXML private TableColumn<EleveModel, String>  colStatut;
-    @FXML private TableColumn<EleveModel, Boolean> colRedoublant;
+    @FXML private TableColumn<EleveModel, Integer> colRedoublant;
 
-    // --- Formulaire ---
     @FXML private VBox panneauForm;
     @FXML private Label titreForm;
     @FXML private TextField fieldNumero;
@@ -34,8 +33,6 @@ public class EleveController {
     @FXML private ComboBox<String> comboActif;
     @FXML private CheckBox checkRedoublant;
     @FXML private Label labelStatus;
-
-    // --- Recherche ---
     @FXML private TextField searchField;
 
     private final EleveService eleveService = new EleveService();
@@ -44,7 +41,6 @@ public class EleveController {
 
     @FXML
     public void initialize() {
-        // Liaison colonnes <-> propriétés du modèle
         colId.setCellValueFactory(new PropertyValueFactory<>("idEleve"));
         colNumero.setCellValueFactory(new PropertyValueFactory<>("numeroEleve"));
         colIdClasse.setCellValueFactory(new PropertyValueFactory<>("idClasse"));
@@ -53,17 +49,32 @@ public class EleveController {
         colStatut.setCellValueFactory(new PropertyValueFactory<>("actif"));
         colRedoublant.setCellValueFactory(new PropertyValueFactory<>("redoublant"));
 
-        comboActif.setItems(FXCollections.observableArrayList("oui", "non"));
+        comboActif.setItems(FXCollections.observableArrayList(
+                "Inscrit", "En attente", "Radié", "Transféré"
+        ));
 
         chargerEleves();
     }
 
     @FXML
     public void chargerEleves() {
-        List<EleveModel> eleves = eleveService.getAll();
-        listeEleves = FXCollections.observableArrayList(eleves);
-        tableEleves.setItems(listeEleves);
-        labelStatus.setText("✅ " + eleves.size() + " élève(s) chargé(s)");
+        new Thread(() -> {
+            try {
+                List<EleveModel> eleves = eleveService.getAll();
+                Platform.runLater(() -> {
+                    listeEleves = FXCollections.observableArrayList(eleves);
+                    tableEleves.setItems(listeEleves);
+                    labelStatus.setStyle("-fx-text-fill: #27ae60;");
+                    labelStatus.setText("✅ " + eleves.size() + " élève(s) chargé(s)");
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    labelStatus.setStyle("-fx-text-fill: #e74c3c;");
+                    labelStatus.setText("❌ Erreur chargement : " + e.getMessage());
+                });
+            }
+        }).start();
     }
 
     @FXML
@@ -95,14 +106,12 @@ public class EleveController {
         }
         eleveEnCoursModification = selectionne;
         titreForm.setText("✏️ Modifier l'élève");
-
         fieldNumero.setText(selectionne.getNumeroEleve());
         fieldIdClasse.setText(String.valueOf(selectionne.getIdClasse()));
         fieldDateInscription.setText(selectionne.getDateInscription());
         fieldAnneeScolaire.setText(selectionne.getAnneeScolaire());
         comboActif.setValue(selectionne.getActif());
         checkRedoublant.setSelected(selectionne.getRedoublant() == 1);
-
         afficherFormulaire(true);
     }
 
@@ -114,40 +123,44 @@ public class EleveController {
             return;
         }
 
-        String numero = fieldNumero.getText();
-        int idClasse = Integer.parseInt(fieldIdClasse.getText().isEmpty() ? "0" : fieldIdClasse.getText());
-        String date = fieldDateInscription.getText();
-        String annee = fieldAnneeScolaire.getText();
-        String actif = comboActif.getValue() != null ? comboActif.getValue() : "non";
+        String numero  = fieldNumero.getText();
+        int idClasse   = Integer.parseInt(fieldIdClasse.getText().isEmpty() ? "0" : fieldIdClasse.getText());
+        String date    = fieldDateInscription.getText();
+        String annee   = fieldAnneeScolaire.getText();
+        String actif   = comboActif.getValue() != null ? comboActif.getValue() : "Inscrit";
         int redoublant = checkRedoublant.isSelected() ? 1 : 0;
 
-        System.out.println("=== ENREGISTRER ===");
-        System.out.println("Mode : " + (eleveEnCoursModification == null ? "AJOUT" : "MODIFICATION"));
-        System.out.println("Numero: " + numero + " | Classe: " + idClasse);
-
-
-        if (eleveEnCoursModification == null) {
-            // AJOUT
-            EleveModel nouvelEleve = new EleveModel(0, idClasse, numero, date, actif, annee, redoublant);
-            eleveService.ajouter(nouvelEleve);
-            labelStatus.setStyle("-fx-text-fill: #27ae60;");
-            labelStatus.setText("✅ Élève ajouté avec succès !");
-        } else {
-            // MODIFICATION
-            eleveEnCoursModification.setNumeroEleve(numero);
-            eleveEnCoursModification.setIdClasse(idClasse);
-            eleveEnCoursModification.setDateInscription(date);
-            eleveEnCoursModification.setAnneeScolaire(annee);
-            eleveEnCoursModification.setActif(actif);
-            eleveEnCoursModification.setRedoublant(redoublant);
-            eleveService.modifier(eleveEnCoursModification);
-            labelStatus.setStyle("-fx-text-fill: #27ae60;");
-            labelStatus.setText("✅ Élève modifié avec succès !");
-        }
-
-        afficherFormulaire(false);
-        chargerEleves();
-
+        new Thread(() -> {
+            try {
+                if (eleveEnCoursModification == null) {
+                    EleveModel nouvelEleve = new EleveModel(
+                            1, idClasse, numero, date, actif, annee, redoublant
+                    );
+                    eleveService.ajouter(nouvelEleve);
+                } else {
+                    eleveEnCoursModification.setNumeroEleve(numero);
+                    eleveEnCoursModification.setIdClasse(idClasse);
+                    eleveEnCoursModification.setDateInscription(date);
+                    eleveEnCoursModification.setAnneeScolaire(annee);
+                    eleveEnCoursModification.setActif(actif);
+                    eleveEnCoursModification.setRedoublant(redoublant);
+                    eleveService.modifier(eleveEnCoursModification);
+                }
+                Platform.runLater(() -> {
+                    afficherFormulaire(false);
+                    viderFormulaire();
+                    chargerEleves();
+                    labelStatus.setStyle("-fx-text-fill: #27ae60;");
+                    labelStatus.setText("✅ Opération réussie !");
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    labelStatus.setStyle("-fx-text-fill: #e74c3c;");
+                    labelStatus.setText("❌ Erreur : " + e.getMessage());
+                });
+            }
+        }).start();
     }
 
     @FXML
@@ -166,10 +179,22 @@ public class EleveController {
 
         confirm.showAndWait().ifPresent(reponse -> {
             if (reponse == ButtonType.OK) {
-                eleveService.supprimer(selectionne.getIdEleve());
-                labelStatus.setStyle("-fx-text-fill: #27ae60;");
-                labelStatus.setText("✅ Élève supprimé.");
-                chargerEleves();
+                new Thread(() -> {
+                    try {
+                        eleveService.supprimer(selectionne.getIdEleve());
+                        Platform.runLater(() -> {
+                            chargerEleves();
+                            labelStatus.setStyle("-fx-text-fill: #27ae60;");
+                            labelStatus.setText("✅ Élève supprimé.");
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Platform.runLater(() -> {
+                            labelStatus.setStyle("-fx-text-fill: #e74c3c;");
+                            labelStatus.setText("❌ Erreur suppression : " + e.getMessage());
+                        });
+                    }
+                }).start();
             }
         });
     }
